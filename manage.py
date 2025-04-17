@@ -20,3 +20,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+git add .
+git commit -m "Initial commit for Pandaco backend"
+git push -u origin main
+
