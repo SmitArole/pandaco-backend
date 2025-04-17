@@ -24,10 +24,7 @@ SECRET_KEY = 'django-insecure-ey(l&^4mt5v2_e#!#zei0j#=8o&whx5w)u&vhxj6!+ek7p4lk+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-import os
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['pandaco.onrender.com']
 
 
 
@@ -40,15 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
-    'rest_framework',
     'core',
+    'rest_framework',
+    'corsheaders',
 ]
 
-
-
-
-MIDDLEWARE = [
+MIDDLEWARE = [MIDDLEWARE =  'corsheaders.middleware.CorsMiddleware',  
+    'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'django_cors_headers.middleware.CorsMiddleware',
 ]
 
 
@@ -131,15 +127,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'core',
-    'rest_framework',
+CORS_ALLOWED_ORIGINS = [
+    'https://your-frontend-domain.vercel.app', 
 ]
-CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://your-frontend-url.vercel.app", 
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://preview--panda-connect-frontend.lovable.app", 
+    
+]
