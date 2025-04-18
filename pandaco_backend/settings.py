@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -24,12 +23,13 @@ SECRET_KEY = 'django-insecure-ey(l&^4mt5v2_e#!#zei0j#=8o&whx5w)u&vhxj6!+ek7p4lk+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['pandaco.onrender.com']
-
-
+ALLOWED_HOSTS = [
+    'pandaco.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,19 +42,16 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-MIDDLEWARE = [MIDDLEWARE =  'corsheaders.middleware.CorsMiddleware',  
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_cors_headers.middleware.CorsMiddleware',
 ]
-
 
 ROOT_URLCONF = 'pandaco_backend.urls'
 
@@ -75,10 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pandaco_backend.wsgi.application'
 
-
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,10 +80,7 @@ DATABASES = {
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -105,37 +96,62 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
 STATIC_URL = 'static/'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CORS settings
 CORS_ALLOWED_ORIGINS = [
-    'https://your-frontend-domain.vercel.app', 
+    "https://preview--panda-connect-frontend.lovable.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://your-frontend-url.vercel.app", 
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://preview--panda-connect-frontend.lovable.app", 
-    
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
+
+# CSRF settings
+CSRF_TRUSTED_ORIGINS = [
+    "https://preview--panda-connect-frontend.lovable.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
