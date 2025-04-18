@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home - PandaCo{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Welcome to PandaCo</h1>
+            <p class="lead">Connect with skilled contractors or find your next project</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">For Contractors</h2>
+                    <p class="card-text">Showcase your skills, build your portfolio, and find new opportunities.</p>
+                    {% if user.is_authenticated %}
+                        {% if user.contractor %}
+                            <a href="{% url 'contractor_profile' user.contractor.id %}" class="btn btn-primary">View My Profile</a>
+                        {% else %}
+                            <a href="{% url 'create_contractor_profile' %}" class="btn btn-primary">Create Profile</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'register' %}" class="btn btn-primary">Register as Contractor</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">For Clients</h2>
+                    <p class="card-text">Find skilled contractors for your projects and manage your tasks efficiently.</p>
+                    <a href="/api/contractors/" class="btn btn-primary">Browse Contractors</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

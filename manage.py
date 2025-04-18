@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pandaco_backend.settings')
@@ -17,10 +16,10 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-
 if __name__ == '__main__':
     main()
-git add .
-git commit -m "Initial commit for Pandaco backend"
-git push -u origin main
+python manage.py shell
+from core.models import Contractor
+Contractor.objects.all()
+
 

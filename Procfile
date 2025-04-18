@@ -1,0 +1,1 @@
+web: gunicorn pandaco_backend.wsgi:application 

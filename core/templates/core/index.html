@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandaco - Home Maintenance Platform</title>
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Pandaco</div>
+            <div class="nav-links">
+                <a href="#" id="home-link">Home</a>
+                <a href="#" id="tasks-link">Tasks</a>
+                <a href="#" id="contractors-link">Contractors</a>
+                <a href="#" id="profile-link">Profile</a>
+                <button id="logout-btn" class="btn btn-warning">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div id="task-list"></div>
+    </main>
+
+    <script src="{% static 'core/js/taskList.js' %}"></script>
+    <script>
+        // Handle navigation
+        document.getElementById('home-link').addEventListener('click', () => {
+            taskList.render();
+        });
+
+        document.getElementById('tasks-link').addEventListener('click', () => {
+            taskList.loadTasks();
+            taskList.render();
+        });
+
+        document.getElementById('contractors-link').addEventListener('click', () => {
+            taskList.showContractorList();
+        });
+
+        document.getElementById('profile-link').addEventListener('click', () => {
+            // Implement profile view
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.reload();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/contractorProfile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    {% if contractor.profile_picture %}
+                        <img src="{{ contractor.profile_picture.url }}" alt="{{ contractor.user.get_full_name }}" class="img-fluid rounded-circle mb-3" style="width: 200px; height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-light rounded-circle mb-3 mx-auto" style="width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user fa-5x text-secondary"></i>
+                        </div>
+                    {% endif %}
+                    <h2>{{ contractor.user.get_full_name }}</h2>
+                    <p class="text-muted">{{ contractor.trade }}</p>
+                    <p class="lead">${{ contractor.hourly_rate }}/hour</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>About Me</h3>
+                    <p>{{ contractor.bio|linebreaks }}</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>Skills</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for skill in contractor.skills_list %}
+                            <span class="badge bg-primary">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            {% if user.is_authenticated and user.contractor.id == contractor.id %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>Manage Profile</h3>
+                        <a href="{% url 'create_contractor_profile' %}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'core/js/contractorProfile.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contractorId = "{{ contractor.id|escapejs }}";
+        const contractorProfile = new ContractorProfile(api_service);
+        contractorProfile.initialize(contractorId);
+    });
+</script>
+{% endblock %} 
