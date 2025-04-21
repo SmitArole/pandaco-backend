@@ -5,16 +5,18 @@ from .views import (
     PortfolioItemViewSet,
     ReviewViewSet,
     ConnectionViewSet,
-    test_connection
+    test_connection,
+    lovable_test
 )
 
 router = DefaultRouter()
-router.register(r'contractors', ContractorViewSet, basename='contractor')
-router.register(r'portfolio', PortfolioItemViewSet, basename='portfolio')
-router.register(r'reviews', ReviewViewSet, basename='review')
-router.register(r'connections', ConnectionViewSet, basename='connection')
+router.register(r'contractors', ContractorViewSet)
+router.register(r'portfolio', PortfolioItemViewSet)
+router.register(r'reviews', ReviewViewSet)
+router.register(r'connections', ConnectionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('test/', test_connection, name='test-connection'),
+    path('lovable-test/', lovable_test, name='lovable-test'),
 ]
