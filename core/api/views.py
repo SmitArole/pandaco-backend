@@ -65,15 +65,36 @@ class PortfolioItemViewSet(viewsets.ModelViewSet):
     serializer_class = PortfolioItemSerializer
     permission_classes = [AllowAny]
 
+    def get_queryset(self):
+        queryset = PortfolioItem.objects.all()
+        contractor_id = self.request.query_params.get('contractor', None)
+        if contractor_id is not None:
+            queryset = queryset.filter(contractor_id=contractor_id)
+        return queryset
+
     def perform_create(self, serializer):
-        serializer.save(contractor=self.request.user.contractor)
+        serializer.save()
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [AllowAny]
 
+    def get_queryset(self):
+        queryset = Review.objects.all()
+        contractor_id = self.request.query_params.get('contractor', None)
+        if contractor_id is not None:
+            queryset = queryset.filter(contractor_id=contractor_id)
+        return queryset
+
 class ConnectionViewSet(viewsets.ModelViewSet):
     queryset = Connection.objects.all()
     serializer_class = ConnectionSerializer
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        queryset = Connection.objects.all()
+        contractor_id = self.request.query_params.get('contractor', None)
+        if contractor_id is not None:
+            queryset = queryset.filter(contractor_id=contractor_id)
+        return queryset

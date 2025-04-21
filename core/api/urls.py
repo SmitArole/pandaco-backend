@@ -19,6 +19,6 @@ router.register(r'connections', ConnectionViewSet, basename='connection')
 # The API URLs are now determined automatically by the router
 urlpatterns = [
     path('', include(router.urls)),
-    path('test/', test_connection, name='test-connection'),
+    path('test-connection/', test_connection, name='test-connection'),
     path('lovable-test/', lovable_test, name='lovable-test'),
 ]

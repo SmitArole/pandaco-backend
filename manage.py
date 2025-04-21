@@ -18,8 +18,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-python manage.py shell
-from core.models import Contractor
-Contractor.objects.all()
 
 
