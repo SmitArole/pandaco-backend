@@ -9,10 +9,10 @@ from .views import (
 )
 
 router = DefaultRouter()
-router.register(r'contractors', ContractorViewSet)
-router.register(r'portfolio', PortfolioItemViewSet)
-router.register(r'reviews', ReviewViewSet)
-router.register(r'connections', ConnectionViewSet)
+router.register(r'contractors', ContractorViewSet, basename='contractor')
+router.register(r'portfolio', PortfolioItemViewSet, basename='portfolio')
+router.register(r'reviews', ReviewViewSet, basename='review')
+router.register(r'connections', ConnectionViewSet, basename='connection')
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
 from ..models import Contractor, PortfolioItem, Review, Connection
@@ -37,7 +37,7 @@ def lovable_test(request):
 class ContractorViewSet(viewsets.ModelViewSet):
     queryset = Contractor.objects.all()
     serializer_class = ContractorSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     @action(detail=True, methods=['get'])
     def portfolio(self, request, pk=None):
@@ -63,7 +63,7 @@ class ContractorViewSet(viewsets.ModelViewSet):
 class PortfolioItemViewSet(viewsets.ModelViewSet):
     queryset = PortfolioItem.objects.all()
     serializer_class = PortfolioItemSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(contractor=self.request.user.contractor)
@@ -71,9 +71,9 @@ class PortfolioItemViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class ConnectionViewSet(viewsets.ModelViewSet):
     queryset = Connection.objects.all()
     serializer_class = ConnectionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
